@@ -48,8 +48,8 @@ export default function GoLive() {
           <Image
             src="/livefusion-phones.png"
             alt="LiveFusion app on iPhone — dashboard, go live, and analytics"
-            width={1024}
-            height={1024}
+            width={2048}
+            height={2048}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 560px"
             className="mx-auto h-auto w-full max-w-full object-contain sm:max-w-xl lg:max-w-2xl lg:ml-auto"
             priority

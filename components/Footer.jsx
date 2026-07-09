@@ -17,8 +17,8 @@ export default function Footer() {
   return (
     <footer className="hairline-t section-pad py-16">
       <div className="max-w-[1600px] mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="lg:col-span-2">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-12 sm:mb-16">
+          <div className="sm:col-span-2 lg:col-span-2">
             <p className="font-display text-xl font-bold mb-4">
               <span className="text-paper">Live</span>
               <span className="text-violet">Fusion</span>
@@ -35,6 +35,7 @@ export default function Footer() {
             </div>
           </div>
 
+          <div className="grid grid-cols-2 gap-8 sm:col-span-2 lg:col-span-2">
           {Object.entries(links).map(([cat, items]) => (
             <div key={cat}>
               <p className="text-[10px] tracking-widest uppercase text-mute mb-4">{cat}</p>
@@ -52,6 +53,7 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+          </div>
         </div>
 
         <div className="hairline-t pt-8 flex flex-col sm:flex-row justify-between gap-4 text-xs text-mute">

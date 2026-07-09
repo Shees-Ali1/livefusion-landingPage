@@ -51,33 +51,22 @@ function StreamFrame({ compact }) {
 
 function Dashboard() {
   return (
-    <div className="grid grid-cols-12 min-h-[400px]">
-      <div className="col-span-12 lg:col-span-8 hairline-r p-3">
-        <StreamFrame />
-        <div className="grid grid-cols-4 gap-px mt-px bg-line">
-          {platformList.map((p) => (
-            <div key={p.name} className="bg-panel p-3 flex items-center gap-2">
-              <p.Icon className="w-4 h-4" style={{ color: p.color }} />
-              <div>
-                <p className="text-[10px] text-mute">{p.name}</p>
-                <p className="text-sm font-semibold" style={{ color: p.color }}>
+    <div className="min-h-[400px] p-3">
+      <StreamFrame />
+      <div className="mt-px grid grid-cols-2 gap-px bg-line sm:grid-cols-4">
+        {platformList.map((p) => (
+          <div key={p.name} className="min-w-0 overflow-hidden bg-panel p-2 sm:p-3">
+            <div className="flex min-w-0 items-center gap-2">
+              <p.Icon className="h-4 w-4 shrink-0" style={{ color: p.color }} />
+              <div className="min-w-0">
+                <p className="truncate text-[10px] text-mute">{p.name}</p>
+                <p className="truncate text-sm font-semibold" style={{ color: p.color }}>
                   {['12.4K', '6.1K', '4.2K', '2.1K'][platformList.indexOf(p)]}
                 </p>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="col-span-12 lg:col-span-4 flex flex-col">
-        <div className="hairline-b px-4 py-3 text-xs text-mute">Unified Chat</div>
-        <div className="flex-1 p-3 space-y-3 overflow-hidden">
-          {chats.map((c, i) => (
-            <div key={i} className="text-xs">
-              <span className="font-semibold" style={{ color: c.color }}>{c.user}</span>
-              <span className="text-mute ml-2">{c.msg}</span>
-            </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -162,10 +151,10 @@ function Analytics() {
 
 function Chat() {
   return (
-    <div className="min-h-[400px] flex flex-col">
-      <div className="hairline-b px-4 py-3 flex justify-between text-xs">
-        <span className="text-mute">Unified Chat</span>
-        <span className="text-violet">248 online</span>
+    <div className="flex min-h-[400px] flex-col">
+      <div className="hairline-b flex items-center justify-between gap-3 px-4 py-3 text-xs">
+        <span className="text-mute">Live Chat</span>
+        <span className="shrink-0 text-violet">248 online</span>
       </div>
       <div className="flex-1 p-4 space-y-4">
         {[...chats, ...chats].map((c, i) => (

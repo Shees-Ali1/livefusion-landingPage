@@ -9,7 +9,7 @@ const plans = [
     name: 'Free',
     price: '£0',
     period: 'forever',
-    features: ['2 platforms', 'Unified chat', 'Basic analytics', 'Push alerts'],
+    features: ['2 platforms', 'Live chat', 'Basic analytics', 'Push alerts'],
   },
   {
     name: 'Pro',

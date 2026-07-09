@@ -7,7 +7,7 @@ import { platformList } from '@/components/PlatformIcons';
 
 const details = [
   'Live chat synced in real time',
-  'Raid and sub alerts unified',
+  'Raid and sub alerts',
   'Low-latency stream relay',
   'Gift and comment tracking',
 ];

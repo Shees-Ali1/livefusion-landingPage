@@ -5,7 +5,7 @@ import { useGsapReveal } from '@/hooks/useGsapReveal';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 const features = [
-  { n: '01', title: 'Unified Chat', desc: 'Every message from every platform in one feed. Filter or view all.' },
+  { n: '01', title: 'Live Chat', desc: 'Every message from Twitch, Kick, YouTube and TikTok in one feed.' },
   { n: '02', title: 'Multi-Broadcast', desc: 'Go live on Twitch, Kick, YouTube and TikTok with a single tap.' },
   { n: '03', title: 'Live Analytics', desc: 'Viewers, followers, and engagement across all platforms at once.' },
   { n: '04', title: 'Edge Alerts', desc: 'Screen-edge notifications for raids, subs, and gifts.' },

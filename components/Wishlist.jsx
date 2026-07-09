@@ -36,13 +36,13 @@ export default function Wishlist() {
   };
 
   return (
-    <section id="wishlist" ref={ref} className="section-gap section-pad hairline-t">
+    <section id="wishlist" ref={ref} className="py-16 sm:py-24 lg:py-32 section-pad hairline-t">
       <div className="max-w-xl mx-auto text-center">
         <SectionLabel className="mb-4">Early Access</SectionLabel>
-        <h2 className="font-display font-bold text-3xl sm:text-4xl text-paper mb-4">
+        <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-paper mb-3 sm:mb-4">
           Be first when we launch.
         </h2>
-        <p className="text-fog text-sm mb-8">
+        <p className="text-fog text-sm mb-6 sm:mb-8">
           Drop your email. We&apos;ll notify you the moment LiveFusion goes live.
         </p>
 

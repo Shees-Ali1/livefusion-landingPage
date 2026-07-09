@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useGsapReveal } from '@/hooks/useGsapReveal';
+import { initGsap } from '@/lib/gsap';
 import SectionLabel from '@/components/ui/SectionLabel';
 
 const steps = [
@@ -15,10 +16,73 @@ const steps = [
 export default function GoLive() {
   const ref = useRef(null);
   const leftRef = useRef(null);
-  const rightRef = useRef(null);
+  const imageWrapRef = useRef(null);
+  const imageRef = useRef(null);
+  const glowRef = useRef(null);
 
   useGsapReveal(leftRef, { y: 50 });
-  useGsapReveal(rightRef, { y: 50, delay: 0.15 });
+
+  useEffect(() => {
+    const wrap = imageWrapRef.current;
+    const img = imageRef.current;
+    const glow = glowRef.current;
+    if (!wrap || !img) return;
+
+    const { gsap } = initGsap();
+
+    const ctx = gsap.context(() => {
+      gsap.set(img, { opacity: 0, y: 80, scale: 0.88, rotateY: -8, transformPerspective: 1200 });
+      if (glow) gsap.set(glow, { opacity: 0, scale: 0.7 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrap,
+          start: 'top 82%',
+          once: true,
+          toggleActions: 'play none none none',
+        },
+        defaults: { ease: 'power4.out' },
+      });
+
+      tl.to(img, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateY: 0,
+        duration: 1.4,
+      });
+
+      if (glow) {
+        tl.to(
+          glow,
+          { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
+          '-=1.1'
+        );
+      }
+
+      gsap.to(img, {
+        y: -14,
+        duration: 3.2,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        delay: 1.6,
+      });
+
+      gsap.to(wrap, {
+        y: -30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      });
+    }, wrap);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section id="golive" ref={ref} className="section-gap section-pad hairline-t overflow-hidden">
@@ -32,7 +96,7 @@ export default function GoLive() {
             RTMP multi-broadcast built into the app. No OBS juggling. No missed raids.
           </p>
           <div className="space-y-0">
-            {steps.map((s, i) => (
+            {steps.map((s) => (
               <div key={s.n} className="flex gap-6 py-6 hairline-b last:border-0">
                 <span className="font-display text-violet font-bold text-sm pt-0.5">{s.n}</span>
                 <div>
@@ -44,16 +108,23 @@ export default function GoLive() {
           </div>
         </div>
 
-        <div ref={rightRef} className="w-full min-w-0">
-          <Image
-            src="/livefusion-phones.png"
-            alt="LiveFusion app on iPhone — dashboard, go live, and analytics"
-            width={2048}
-            height={2048}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 560px"
-            className="mx-auto h-auto w-full max-w-full object-contain sm:max-w-xl lg:max-w-2xl lg:ml-auto"
-            priority
+        <div ref={imageWrapRef} className="relative w-full min-w-0 [perspective:1200px]">
+          <div
+            ref={glowRef}
+            className="pointer-events-none absolute inset-[10%] rounded-full bg-[radial-gradient(circle,rgba(123,108,246,0.22)_0%,transparent_70%)] blur-2xl"
+            aria-hidden
           />
+          <div ref={imageRef} className="relative z-10 will-change-transform">
+            <Image
+              src="/livefusion-phones.png"
+              alt="LiveFusion app on iPhone — dashboard, go live, and analytics"
+              width={2048}
+              height={2048}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 560px"
+              className="mx-auto h-auto w-full max-w-full object-contain sm:max-w-xl lg:max-w-2xl lg:ml-auto"
+              priority
+            />
+          </div>
         </div>
       </div>
     </section>
